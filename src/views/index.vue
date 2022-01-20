@@ -1,13 +1,20 @@
 <template>
-<div className="main">
-        <div className="header">视频监视</div>
-        <div className="mainbox">
-              <div className="boxall" v-for="(item,index) in state.list" :key="item.id" >
-                <div className="boxitem">
-                  <div className="video-area">
-                    <div :id="`video${index}`" @click="clickPay(item,index)" ref="refInfo"></div>
+<div class="main">
+        <div class="header">视频监视</div>
+        <div class="mainbox">
+              <div class="boxall" v-for="(item,index) in state.list" :key="item.id" >
+                <div class="boxitem">
+                  <div class="video-area">
+                    <!-- <div :id="`video${index}`" @click="clickPay(item,index)" ref="refInfo"></div> -->
+                    <video controls ref="videoplay" muted :poster="item.poster"  autoplay style="width:100%;height: 100%;"  id="video" :src="item.src"   @click="clickPay(item,index)" >
+                    </video>
+                    <div class="info-des">
+                      <p>温度：20</p>
+                      <p>天气：晴</p>
+                      <p>地点：成都</p>
+                    </div>
                   </div>
-                  <div className="boxfoot"></div>
+                  <div class="boxfoot"></div>
                 </div>
               </div>
         </div>
@@ -27,38 +34,47 @@ export default defineComponent({
         {
           id: "1",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "2",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "3",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "4",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "5",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "6",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "7",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "8",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         {
           id: "9",
           src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          poster:"https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
         },
         // {
         //   id: "10",
@@ -68,46 +84,45 @@ export default defineComponent({
     };
 
 
-    const initPlayer = (item:any,index:any)=>{
-        state.dom[index] = new Player({
-        id: `video${index}`,
-        // el: document.getElementById(`video${index}`),
-        autoplay: false,//自动播放
-        loop: true,//循环播放
-        videoInit: true,//视频首帧
-        volume: 0.4,//音量
-        width: '100%',
-        height: '100%',
-        fitVideoSize: 'fixWidth',
-        url: item.url,
-        download: false,//视频能下载
-        poster: "https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
-        playbackRate: [0.5, 0.75, 1, 1.5, 2], //传入倍速可选数组
-        defaultPlaybackRate: 1.5,//默认播放速度
-        })
+    //播放
+    const clickPay = async(item:any,curIndex:any)=>{
+      // if (videoplay.paused) {
+      //   videoplay.play();
+      // } else {
+      //   videoplay.pause();
+      // }
+
+      for (let index = 0; index < state.list.length; index++) {
+        if(curIndex != index){
+          let otherVideo = internalInstance?.ctx?.$refs.videoplay[index]
+          if(!otherVideo.paused){
+            otherVideo.pause();
+          }
+        }
+        
+      }
     }
 
-    //播放
-    const clickPay = async(item:any,index:any)=>{
-        // console.log(refInfo.value,'菜单',internalInstance.ctx.$refs.refInfo[index]);
-        await nextTick()
-        state.dom[index].play()
-        
-    }
     const videoInit = async()=>{
-        state.list.map((item:any,index:number)=>{
-            initPlayer(item,index)
-        }) 
-        await nextTick()
+      await nextTick()
+      for (let index = 0; index < state.list.length; index++) {
+        
+        let otherVideo = internalInstance?.ctx?.$refs.videoplay[index]
+        // if(!otherVideo.paused){
+          otherVideo.autoPlay;
+        // }
+        
+      }
     }
+
+
     onMounted(() => {
-        videoInit()
+      // videoInit()
       
     })
     return {
       state,
       clickPay,
-      initPlayer,
     };
   },
 });
