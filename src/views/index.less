@@ -1,0 +1,104 @@
+.main{
+    min-width: 100vh;
+    overflow: hidden;
+}
+.header{
+    padding:1rem 0;
+    text-align:center;
+    font-size: 2rem;
+    height:4rem;
+    // line-height: 4rem;
+}
+
+.mainbox{
+    min-height: 100vh-6rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .boxall{
+        width: calc(100% / 3);
+        height: 15;
+        // background:blue;
+        padding: 1rem;
+
+        .boxitem{
+            border: 1px solid rgba(25,186,139,.17);
+            background: rgba(255,255,255,.04) url("../assets/images/line(1).png");
+            height: 100%;
+            background-size: 100% auto;
+            position: relative;
+            margin-bottom: 0.15rem;
+            z-index: 10;
+            padding: 0.5rem;
+
+            .video-area{
+                height: 100%;
+                width: 100%;
+                padding: 0.2rem;
+            }
+
+            &::before{
+                border-left: 5px solid #02a6b5;
+                left: 0;
+            }
+
+            &::before{
+                position: absolute;
+                width: 1rem;
+                height: 1rem;
+                content: "";
+                border-top: 5px solid #02a6b5;
+                top: 0;
+            }
+            
+            &::after{
+                border-right: 5px solid #02a6b5;
+                right: 0;
+            }
+            &::after{
+                position: absolute;
+                width: 1rem;
+                height: 1rem;
+                content: "";
+                border-top: 5px solid #02a6b5;
+                top: 0;
+            }
+
+            .boxfoot{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                left: 0;
+
+                &::before{
+                    position: absolute;
+                    width: 1rem;
+                    height: 1rem;
+                    content: "";
+                    border-bottom: 5px solid #02a6b5;
+                    bottom: 0;
+                }
+
+                &::before{
+                    border-left: 5px solid #02a6b5;
+                    left: 0;
+                }
+
+                &::after{
+                        position: absolute;
+                        width: 1rem;
+                        height: 1rem;
+                        content: "";
+                        border-bottom: 5px solid #02a6b5;
+                        bottom: 0;
+                }
+                &::after{
+                    border-right: 5px solid #02a6b5;
+                    right: 0;
+                }
+            }
+
+            
+        }
+    }
+}
