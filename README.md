@@ -14,3 +14,6 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 ###  资料
 https://blog.csdn.net/weixin_45753961/article/details/117561893
+
+### nginx 报错
+https://blog.csdn.net/u010918487/article/details/89555163

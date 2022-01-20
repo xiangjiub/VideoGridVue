@@ -4,6 +4,6 @@ import Index from '/@/views/Xindex.vue'
 </script>
 
 <template>
-  <Index  />
+  <router-view></router-view>
 </template>
 
