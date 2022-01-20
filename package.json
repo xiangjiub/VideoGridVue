@@ -15,7 +15,8 @@
     "vant": "^2.12.39",
     "vite-plugin-style-import": "^1.4.1",
     "vue": "^3.2.25",
-    "xgplayer": "^2.31.4"
+    "xgplayer": "^2.31.4",
+    "xgplayer-hls.js": "^2.6.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

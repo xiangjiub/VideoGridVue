@@ -6,8 +6,11 @@
                 <div className="boxitem">
                   <div className="video-area">
                     <div :id="`video${index}`" @click="clickPay(item,index)" ref="refInfo"></div>
-                    <!-- <video ref="videoplay" style="width:100%;height: 100%;"  id="video" :src="item.src"   @click="clickPay(item,index)" >
-                    </video> -->
+                    <div class="info-des">
+                      <p>温度：20</p>
+                      <p>天气：晴</p>
+                      <p>地点：成都</p>
+                    </div>
                   </div>
                   <div className="boxfoot"></div>
                 </div>
@@ -17,13 +20,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, nextTick, onMounted, ref, toRef } from "vue";
+import { defineComponent, getCurrentInstance, nextTick, onMounted, reactive, ref, toRef } from "vue";
 import Player from 'xgplayer'
+// import HlsJsPlayer from "xgplayer-hls.js"
 
 export default defineComponent({
   setup() {
     const internalInstance = getCurrentInstance() // 有效
-    let state:any = {
+    let state:any = reactive({
       dom: [],
       list: [
         {
@@ -67,47 +71,52 @@ export default defineComponent({
         //   src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
         // },
       ],
-    };
+    });
 
 
-    const initPlayer = (item:any,index:any)=>{
-      state.dom[index] = new Player({
-        id: `video${index}`,
-        autoplay: false,//自动播放
-        loop: true,//循环播放
-        videoInit: true,//视频首帧
-        volume: 0.4,//音量
-        cssFullscreen: true,//全屏
-        width: '100%',
-        height: '100%',
-        fitVideoSize: 'fixWidth',
-        controls:true,// 播放器控制
-        url: item.url,
-        download: false,//视频能下载
-        poster: "https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
-        playbackRate: [0.5, 0.75, 1, 1.5, 2], //传入倍速可选数组
-        defaultPlaybackRate: 1.5,//默认播放速度
-        // cors: true // 请求是否跨域
-      })
+    const initPlayer = async()=>{
+      await nextTick()
+      
+
+      state.list.map((item:any,index:number)=>{
+        let player = new Player({
+          id: `video${index}`,
+          // autoplay: true,//自动播放
+          autoplayMuted: true,//自动播放静音，设置自动播放参数必要参数
+          // loop: true,//循环播放
+          videoInit: true,//视频首帧
+          volume: 0.4,//音量
+          cssFullscreen: false,//全屏
+          width: '100%',
+          height: '100%',
+          fitVideoSize: 'fixWidth',
+          lang: 'zh-cn',//国际化
+          controls:true,// 播放器控制
+          url:"http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          // download: false,//视频能下载
+          poster: "https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
+          playbackRate: [0.5, 0.75, 1, 1.5, 2], //传入倍速可选数组
+          defaultPlaybackRate: 1,//默认播放速度
+          // cors: true // 请求是否跨域
+        })
+        state.dom.push(player)
+      }) 
+
+
+      // state.dom[index].once('ready',()=>{console.log('ready',index);})
+      // 视频生成结束
+      // state.dom[index].once('complete',()=>{console.log('complete');})
     }
 
     //播放
-    const clickPay = async(item:any,curIndex:any)=>{
-      // console.log(refInfo.value,'菜单',internalInstance.ctx.$refs.refInfo[index]);
-      // await nextTick()
-      // state.dom[index].play()
+    const clickPay = (item:any,curIndex:any)=>{
+      state.dom[curIndex].play()
     }
 
-
-    const videoInit = async()=>{
-        state.list.map((item:any,index:number)=>{
-            initPlayer(item,index)
-        }) 
-        await nextTick()
-    }
     onMounted(() => {
-      videoInit()
+      initPlayer()
     })
+
     return {
       state,
       clickPay,
