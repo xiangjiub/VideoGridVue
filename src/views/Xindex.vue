@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance, nextTick, onMounted, reactive, ref, toRef } from "vue";
-import Player from 'xgplayer'
-// import HlsJsPlayer from "xgplayer-hls.js"
+// import Player from 'xgplayer'
+import HlsPlayer from 'xgplayer-hls';
 
 export default defineComponent({
   setup() {
@@ -32,39 +32,39 @@ export default defineComponent({
       list: [
         {
           id: "1",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "2",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "3",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "4",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "5",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "6",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "7",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "8",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         {
           id: "9",
-          src: "http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          src: "//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/hls/xgplayer-demo.m3u8",
         },
         // {
         //   id: "10",
@@ -79,7 +79,7 @@ export default defineComponent({
       
 
       state.list.map((item:any,index:number)=>{
-        let player = new Player({
+        let player = new HlsPlayer({
           id: `video${index}`,
           // autoplay: true,//自动播放
           autoplayMuted: true,//自动播放静音，设置自动播放参数必要参数
@@ -92,7 +92,7 @@ export default defineComponent({
           fitVideoSize: 'fixWidth',
           lang: 'zh-cn',//国际化
           controls:true,// 播放器控制
-          url:"http://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",
+          url:item.src,
           // download: false,//视频能下载
           poster: "https://s2.pstatp.com/cdn/expire-1-M/byted-player-videos/1.0.0/poster.jpg",
           playbackRate: [0.5, 0.75, 1, 1.5, 2], //传入倍速可选数组

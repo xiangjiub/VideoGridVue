@@ -9,4 +9,6 @@ declare module '*.vue' {
 
 declare module 'lodash-es';
 
+declare module 'xgplayer-hls.js';
+declare module 'xgplayer-hls';
 declare const VITE_BASE_API:string

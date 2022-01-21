@@ -4,7 +4,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '/@/views/index.vue'),
+        component: () => import(/* webpackChunkName: "home" */ '/@/views/Xindex.vue'),
         meta: {
             title: '首页',
             top: false,
