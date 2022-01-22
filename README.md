@@ -14,3 +14,5 @@ npm run build
 ###  资料
 https://blog.csdn.net/weixin_45753961/article/details/117561893
 
+### 项目描述
+用于显示直播的视频

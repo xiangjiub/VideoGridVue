@@ -19,9 +19,10 @@
       </div>    
 </template>
 
+
 <script lang="ts">
 import { defineComponent, getCurrentInstance, nextTick, onMounted, reactive, ref, toRef } from "vue";
-// import Player from 'xgplayer'
+
 import HlsPlayer from 'xgplayer-hls';
 
 export default defineComponent({
